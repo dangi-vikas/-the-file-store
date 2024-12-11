@@ -1,3 +1,5 @@
+package com.project.client;
+
 import java.util.Scanner;
 
 public class Main {
