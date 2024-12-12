@@ -83,4 +83,11 @@ public class FileStore {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/checkHash")
+    public ResponseEntity<String> checkHash(@RequestParam String hash) {
+        if (fileHashes.containsValue(hash)) {
+            return ResponseEntity.ok("DUPLICATE");
+        }
+        return ResponseEntity.ok("UNIQUE");
+    }
 }

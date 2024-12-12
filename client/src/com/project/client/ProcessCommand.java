@@ -4,6 +4,7 @@ import com.project.client.services.*;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
+import java.security.NoSuchAlgorithmException;
 
 public class ProcessCommand {
 
@@ -22,7 +23,7 @@ public class ProcessCommand {
                 for (int i = 2; i < parts.length; i++) {
                     try {
                         new AddFileService().addFile(client, parts[i]);
-                    } catch (IOException | InterruptedException e) {
+                    } catch (IOException | InterruptedException | NoSuchAlgorithmException e) {
                         System.out.print("Some unknown error occurred!");
                     }
                 }
