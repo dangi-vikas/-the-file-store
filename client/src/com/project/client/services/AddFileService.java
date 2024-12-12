@@ -18,7 +18,8 @@ import static com.project.client.Constants.SERVER_URL;
 
 public class AddFileService {
     public void addFile(HttpClient client, String fileName) throws IOException, InterruptedException, NoSuchAlgorithmException {
-        File file = new File(fileName);
+        String filePath = "client/fileupload/" + fileName;
+        File file = new File(filePath);
 
         if (!file.exists()) {
             file.createNewFile();
