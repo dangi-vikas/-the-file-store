@@ -59,6 +59,10 @@ public class FileStore {
     public ResponseEntity<String> updateFile(@RequestParam String fileName, @RequestParam String hash, @RequestBody byte[] content) throws IOException {
         File file = new File(FILE_STORE_PATH + fileName);
 
+        if (!file.exists()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File not found.");
+        }
+
         if (file.exists() && fileHashes.getOrDefault(fileName, "").equals(hash)) {
             return ResponseEntity.ok("File already has the same content.");
         }

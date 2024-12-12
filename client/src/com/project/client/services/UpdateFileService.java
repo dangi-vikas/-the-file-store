@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 
 public class UpdateFileService {
     public void updateFile(HttpClient client, String fileName) throws IOException, InterruptedException {
-            Path path = Paths.get(fileName);
+            Path path = Paths.get("client/fileupload/" + fileName);
             if (!Files.exists(path)) {
                 System.out.println("File does not exist: " + fileName);
                 return;
@@ -21,7 +21,7 @@ public class UpdateFileService {
 
             String hash = String.valueOf(Files.mismatch(path, path));
             HttpRequest request = HttpRequest.newBuilder()
-                    .uri(URI.create(Constants.SERVER_URL + "/update?fileName=" + path.getFileName() + "&hash=" + hash))
+                    .uri(URI.create(Constants.SERVER_URL + "/update?fileName=" +fileName + "&hash=" + hash))
                     .PUT(HttpRequest.BodyPublishers.ofFile(path))
                     .build();
 
