@@ -1,8 +1,6 @@
 package com.project.spring.the_file_store.services;
 
 import com.project.spring.the_file_store.Constants;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -20,5 +18,16 @@ public class FileStoreService {
         }
 
         fileHashes.put(fileName, hash);
+    }
+
+    public String[] listFiles() {
+        File folder = new File(Constants.FILE_STORE_PATH);
+        String[] files = folder.list();
+        return  files;
+    }
+
+    public void removeFile(String fileName, File file, Map<String, String> fileHashes) {
+        file.delete();
+        fileHashes.remove(fileName);
     }
 }

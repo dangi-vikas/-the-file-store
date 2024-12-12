@@ -2,6 +2,7 @@ package com.project.client;
 
 import com.project.client.services.AddFileService;
 import com.project.client.services.ListFileService;
+import com.project.client.services.RemoveFileService;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -38,9 +39,14 @@ public class ProcessCommand {
                 break;
 
             case "rm":
-                if (parts.length != 2) {
+                if (parts.length != 3) {
                     System.out.println("Usage: rm <file>");
                     return;
+                }
+                try {
+                    RemoveFileService.removeFile(client, parts[2]);
+                } catch (IOException | InterruptedException e) {
+                    System.out.print("Some unknown error occurred!");
                 }
                 break;
 

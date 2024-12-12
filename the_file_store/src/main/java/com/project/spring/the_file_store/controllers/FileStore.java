@@ -11,6 +11,8 @@ import java.io.*;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static com.project.spring.the_file_store.Constants.FILE_STORE_PATH;
+
 @RestController
 @RequestMapping("/filestore")
 public class FileStore {
@@ -20,7 +22,7 @@ public class FileStore {
 
     @PostMapping("/add")
     public ResponseEntity<String> addFile(@RequestParam String fileName, @RequestParam String hash, @RequestBody byte[] content)  {
-        File file = new File(Constants.FILE_STORE_PATH + fileName);
+        File file = new File(FILE_STORE_PATH + fileName);
 
         if (file.exists() && fileHashes.getOrDefault(fileName, "").equals(hash)) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body("File already exists with the same content.");
@@ -41,4 +43,18 @@ public class FileStore {
 
         return ResponseEntity.ok(String.join("\n", files));
     }
+
+    @DeleteMapping("/remove")
+    public ResponseEntity<String> removeFile(@RequestParam String fileName) {
+        File file = new File(FILE_STORE_PATH + fileName);
+
+        if (!file.exists()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("File not found.");
+        }
+
+        fileStoreService.removeFile(fileName, file, fileHashes);
+        return ResponseEntity.ok("File removed successfully.");
+    }
+
+
 }
