@@ -1,6 +1,5 @@
 package com.project.spring.the_file_store.controllers;
 
-import com.project.spring.the_file_store.Constants;
 import com.project.spring.the_file_store.services.FileStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -67,6 +66,21 @@ public class FileStore {
         fileStoreService.updateFile(file, content, hash, fileHashes, fileName);
 
         return ResponseEntity.ok("File updated successfully.");
+    }
+
+    @GetMapping("/wc")
+    public ResponseEntity<String> wordCount() throws IOException {
+        long wordCount = fileStoreService.getWordCount();
+
+        return ResponseEntity.ok("Total words: " + wordCount);
+    }
+
+    @GetMapping("/freq-words")
+    public ResponseEntity<String> frequentWords(@RequestParam int limit, @RequestParam(defaultValue = "dsc") String order) throws IOException {
+        boolean ascending = "asc".equals(order);
+        String result = fileStoreService.findFrequentWords(limit, ascending);
+
+        return ResponseEntity.ok(result);
     }
 
 }

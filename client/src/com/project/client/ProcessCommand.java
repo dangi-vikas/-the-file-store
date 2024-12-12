@@ -1,9 +1,6 @@
 package com.project.client;
 
-import com.project.client.services.AddFileService;
-import com.project.client.services.ListFileService;
-import com.project.client.services.RemoveFileService;
-import com.project.client.services.UpdateFileService;
+import com.project.client.services.*;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -64,9 +61,28 @@ public class ProcessCommand {
                 break;
 
             case "wc":
+                try {
+                    new WordCountService().getWordCount(client);
+                } catch (IOException | InterruptedException e) {
+                    System.out.print("Some unknown error occurred!");
+                }
                 break;
 
             case "freq-words":
+                int limit = 10;
+                String order = "dsc";
+                for (int i = 2; i < parts.length; i++) {
+                    if (parts[i].startsWith("--limit=")) {
+                        limit = Integer.parseInt(parts[i].substring("--limit=".length()));
+                    } else if (parts[i].startsWith("--order=")) {
+                        order = parts[i].substring("--order=".length());
+                    }
+                }
+                try {
+                    new FindFrequentWordService().frequentWords(client, limit, order);
+                } catch (IOException | InterruptedException e) {
+                    System.out.print("Some unknown error occurred!");
+                }
                 break;
 
             default:
