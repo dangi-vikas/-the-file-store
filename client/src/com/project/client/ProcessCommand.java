@@ -3,6 +3,7 @@ package com.project.client;
 import com.project.client.services.AddFileService;
 import com.project.client.services.ListFileService;
 import com.project.client.services.RemoveFileService;
+import com.project.client.services.UpdateFileService;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -17,7 +18,7 @@ public class ProcessCommand {
 
         switch (action) {
             case "add":
-                if (parts.length < 2) {
+                if (parts.length < 3) {
                     System.out.println("Usage: add <file1> <file2> ...");
                     return;
                 }
@@ -51,9 +52,14 @@ public class ProcessCommand {
                 break;
 
             case "update":
-                if (parts.length != 2) {
+                if (parts.length != 3) {
                     System.out.println("Usage: update <file>");
                     return;
+                }
+                try {
+                    new UpdateFileService().updateFile(client, parts[2]);
+                } catch (IOException | InterruptedException e) {
+                    System.out.print("Some unknown error occurred!");
                 }
                 break;
 

@@ -56,5 +56,17 @@ public class FileStore {
         return ResponseEntity.ok("File removed successfully.");
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<String> updateFile(@RequestParam String fileName, @RequestParam String hash, @RequestBody byte[] content) throws IOException {
+        File file = new File(FILE_STORE_PATH + fileName);
+
+        if (file.exists() && fileHashes.getOrDefault(fileName, "").equals(hash)) {
+            return ResponseEntity.ok("File already has the same content.");
+        }
+
+        fileStoreService.updateFile(file, content, hash, fileHashes, fileName);
+
+        return ResponseEntity.ok("File updated successfully.");
+    }
 
 }

@@ -30,4 +30,14 @@ public class FileStoreService {
         file.delete();
         fileHashes.remove(fileName);
     }
+
+    public void updateFile(File file, byte[] content, String hash, Map<String, String> fileHashes, String fileName) {
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            fos.write(content);
+        } catch (IOException e) {
+            System.out.println("Some error occurred");
+        }
+
+        fileHashes.put(fileName, hash);
+    }
 }
