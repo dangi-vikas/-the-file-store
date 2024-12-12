@@ -30,4 +30,15 @@ public class FileStore {
 
         return ResponseEntity.status(HttpStatus.CREATED).body("File added successfully.");
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<String> listFiles() {
+        String[] files = fileStoreService.listFiles();
+
+        if (files == null || files.length == 0) {
+            return ResponseEntity.ok("No files in the store.");
+        }
+
+        return ResponseEntity.ok(String.join("\n", files));
+    }
 }

@@ -1,6 +1,7 @@
 package com.project.client;
 
 import com.project.client.services.AddFileService;
+import com.project.client.services.ListFileService;
 
 import java.io.IOException;
 import java.net.http.HttpClient;
@@ -29,6 +30,11 @@ public class ProcessCommand {
                 break;
 
             case "ls":
+                try {
+                    new ListFileService().listFiles(client);
+                } catch (IOException | InterruptedException e) {
+                    System.out.print("Some unknown error occurred!");
+                }
                 break;
 
             case "rm":
