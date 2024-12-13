@@ -35,20 +35,40 @@ A **File Store Service** that allows clients to manage plain-text files on a ser
 
 ## Usage
 ### Command-Line Client
+![start screen](images/startscreen.png)  
+To add and update the files, please keep the required files in **_fileupload_** directory of the client.
+
+
 - **Add Files**
+  <br />
 Upload files to the server:
 
+![add command](images/fileadd.png)
+
 - **List Files**
+  <br />
 List all files on the server:
+![list command](images/filelist.png)
 
 - **Remove a File**
+  <br />
 Delete a specific file:
+![delete command](images/filedel.png)
+
+- **Update a File**
+  <br />
+Update a specific file:  
+![update command](images/fileupdated.png)
 
 - **Word Count**
-Count the total words in all files:
+  <br />
+Count the total words in all files:  
+![word count command](images/wordcount.png)
 
 - **Frequent Words**
+  <br />
 Find the most frequent words:
+![freq words command](images/freqword.png)
 
 ---
 ## Authors
