@@ -1,17 +1,22 @@
 package com.project.client;
 
-import com.project.client.services.*;
-
 import java.io.IOException;
 import java.net.http.HttpClient;
 import java.security.NoSuchAlgorithmException;
+import com.project.client.services.*;
 
 public class ProcessCommand {
 
     public void processCommand(String command) {
         HttpClient client = HttpClient.newHttpClient();
         String[] parts = command.split(" ");
+
         if(parts.length < 2) return;
+        if(!parts[0].equalsIgnoreCase("store")) {
+            System.out.println("Unknown command: " + parts[0]);
+            return;
+        }
+
         String action = parts[1];
 
         switch (action) {

@@ -1,28 +1,32 @@
 package com.project.client.services;
 
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
 import static com.project.client.Constants.SERVER_URL;
+import static java.nio.file.Files.newBufferedWriter;
 
 public class AddFileService {
     public void addFile(HttpClient client, String fileName) throws IOException, InterruptedException, NoSuchAlgorithmException {
-        String filePath = "client/fileupload/" + fileName;
+        String filePath = "the_file_store_client/fileupload/" + fileName;
         File file = new File(filePath);
 
         if (!file.exists()) {
             file.createNewFile();
+            BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+            writer.write("New File");
+            writer.close();
         }
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");

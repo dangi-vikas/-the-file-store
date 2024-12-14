@@ -11,7 +11,8 @@
 	<groupId>com.project.spring</groupId>
 	<artifactId>the_file_store</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>the_file_store</name>
+    <packaging>jar</packaging>
+    <name>the_file_store</name>
 	<description>A Simple File Store Service</description>
 	<url/>
 	<licenses>
@@ -20,7 +21,7 @@
 	<developers>
 		<developer/>
 	</developers>
-	<scm>
+      <scm>
 		<connection/>
 		<developerConnection/>
 		<tag/>
@@ -28,6 +29,8 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -54,7 +57,28 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<parameters>true</parameters>
+				</configuration>
+			</plugin>
+			<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.project.spring.the_file_store.TheFileStoreApplication</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+
 		</plugins>
+		<finalName>file-store-service</finalName>
 	</build>
 
 </project>
