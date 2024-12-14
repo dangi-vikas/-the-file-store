@@ -35,7 +35,7 @@ A **File Store Service** that allows clients to manage plain-text files on a ser
 
 ## Usage
 ### Command-Line Client
-![start screen](images/startscreen.png)  
+![start screen](images/newstartscreen.png)  
 To add and update the files, please keep the required files in **_fileupload_** directory of the client.
 
 
