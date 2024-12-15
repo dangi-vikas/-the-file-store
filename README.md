@@ -53,7 +53,7 @@ A **File Store Service** that allows clients to manage plain-text files on a ser
   3. Verify the project structure. Ensure that the project directory contains the necessary files and subdirectories, including a pom.xml file (Maven configuration file).
   4. Install dependencies - Run the command _mvn install_ to install the project’s dependencies. 
   5. Compile and package the application - Run the command _mvn compile_ to compile the Java code, and then _mvn package_ to package the application into a JAR file.
-  6. Run the application - You can run the application using the command _java -jar <jar-file-name>_.
+  6. Run the application - You can run the application using the command _java -jar (jar-file-name).
 ---
 
 
