@@ -33,6 +33,30 @@ A **File Store Service** that allows clients to manage plain-text files on a ser
 
 ---
 
+## Run The File Store Application
+
+- Get the Docker images of client and server from below links: <br />
+  [Client Image](https://hub.docker.com/repository/docker/dangivikas/file-store-client/general) <br />
+  [Server Image](https://hub.docker.com/repository/docker/dangivikas/file-store-server/general)
+  
+  Pull the images and follow the below steps: <br />
+  1. Put both the images on the same network for that first create a network: <br />
+     *docker network create file-store-network*
+  2. Run the server image on that network: <br />
+     *docker run -d --name file-store-server --network file-store-network -p 8080:8080 file-store-server:latest*
+  3. Run the client on the same network: <br />
+     *docker run -it  --name file-store-client  --network file-store-network  -e SERVER_URL="http://file-store-server:8080/filestore" file-store-client:latest*
+
+- To run the application directly by cloning the repository follow:
+  1. Clone the repository.
+  2. Navigate to the project directory to the directory where the project is cloned.
+  3. Verify the project structure. Ensure that the project directory contains the necessary files and subdirectories, including a pom.xml file (Maven configuration file).
+  4. Install dependencies - Run the command _mvn install_ to install the project’s dependencies. 
+  5. Compile and package the application - Run the command _mvn compile_ to compile the Java code, and then _mvn package_ to package the application into a JAR file.
+  6. Run the application - You can run the application using the command _java -jar <jar-file-name>_.
+---
+
+
 ## Usage
 ### Command-Line Client
 ![start screen](images/newstartscreen.png)  
