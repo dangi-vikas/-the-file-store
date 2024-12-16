@@ -7,6 +7,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -88,10 +92,13 @@ public class FileStore {
     }
 
     @GetMapping("/checkHash")
-    public ResponseEntity<String> checkHash(@RequestParam String hash) {
+    public ResponseEntity<String> checkHash(@RequestParam String hash, @RequestParam String newFileName) {
         if (fileHashes.containsValue(hash)) {
+            fileStoreService.addFileWhenAlreadyDuplicateFileAvailable(hash, newFileName, fileHashes);
             return ResponseEntity.ok("DUPLICATE");
         }
         return ResponseEntity.ok("UNIQUE");
     }
+
+
 }

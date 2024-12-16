@@ -34,7 +34,7 @@ public class AddFileService {
         String fileHash = Base64.getEncoder().encodeToString(md.digest(fileBytes));
 
         HttpRequest hashCheckRequest = HttpRequest.newBuilder()
-                .uri(URI.create(SERVER_URL + "/checkHash?hash=" + fileHash))
+                .uri(URI.create(SERVER_URL + "/checkHash?hash=" + fileHash + "&newFileName=" + fileName))
                 .GET()
                 .build();
 

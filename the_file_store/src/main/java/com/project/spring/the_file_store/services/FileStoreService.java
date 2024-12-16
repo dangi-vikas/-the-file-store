@@ -6,7 +6,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -81,7 +83,7 @@ public class FileStoreService {
                     })
                     .collect(Collectors.groupingBy(word -> word, Collectors.counting()));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Some error occurred");
         }
 
         String result = wordFrequency.entrySet().stream()
@@ -91,5 +93,22 @@ public class FileStoreService {
                 .collect(Collectors.joining("\n"));
 
         return result;
+    }
+
+    public void addFileWhenAlreadyDuplicateFileAvailable(String hash, String newFileName, Map<String, String> fileHashes) {
+        String oldFileName = fileHashes.entrySet().stream()
+                .filter(hashes -> hashes.getValue().equals(hash))
+                .map(Map.Entry::getKey)
+                .findFirst().orElse("");
+
+        if(oldFileName.equalsIgnoreCase(newFileName)) return;
+
+        File originalFile = new File(FILE_STORE_PATH + oldFileName);
+        Path newFile = Paths.get(FILE_STORE_PATH + newFileName);
+        try {
+            Files.copy(originalFile.toPath(), newFile, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            System.out.println("Some error occurred");
+        }
     }
 }
